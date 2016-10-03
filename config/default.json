@@ -1,0 +1,17 @@
+{
+  "AWS_ACCESS_KEY_ID": "",
+  "AWS_SECRET_ACCESS_KEY": "",
+  "region": "us-east-1",
+  "s3-config-bucket": "",
+  "s3-cert-bucket": "",
+  "sns-arn": "",
+  "acme-challenge-expires-in": 3,
+  "acme-dns-retry": 30,
+  "acme-dns-retry-delay-ms": 2000,
+  "acme-site-key": "",
+  "acme-site-info-file": "",
+  "acme-user-info-file": "",
+  "acme-user-email": "",
+  "acme-user-key-bits": 2048,
+  "acme-directory-url": "https://acme-staging.api.letsencrypt.org"
+}
