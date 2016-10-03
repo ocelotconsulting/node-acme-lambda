@@ -4,7 +4,7 @@ Use [AWS Lambda](https://aws.amazon.com/lambda/) to manage SSL certificates for
 Lets-Encrypt.
 
 ## Project status
-This project has just begun, I will be adding features as fast as I can to get it to completion in a relatively short time period (9-26-2016)
+This project has just begun, I will be adding features as fast as I can to get it to completion in a relatively short time period (10-3-2016)
 
 # Why do I want this?
 Rather than having to dedicate a machine to running the Lets-Encrypt client to
