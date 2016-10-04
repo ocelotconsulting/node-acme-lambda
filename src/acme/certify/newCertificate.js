@@ -1,5 +1,4 @@
 import sendSignedRequest from '../sendSignedRequest'
-import winston from 'winston'
 import downloadBinary from '../../util/downloadBinary'
 
 const toIssuerCert = (links) => {

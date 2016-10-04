@@ -1,7 +1,7 @@
-import config from 'config'
+import config from '../../../config/default.json'
 
 module.exports = () => ({
-  region: config.get('region'),
-  accessKeyId: config.get('AWS_ACCESS_KEY_ID'),
-  secretAccessKey: config.get('AWS_SECRET_ACCESS_KEY')
+  region: config['region'],
+  accessKeyId: config['AWS_ACCESS_KEY_ID'],
+  secretAccessKey: config['AWS_SECRET_ACCESS_KEY']
 })

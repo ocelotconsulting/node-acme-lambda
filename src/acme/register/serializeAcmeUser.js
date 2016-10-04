@@ -1,11 +1,11 @@
-import config from 'config'
+import config from '../../../config/default.json'
 import saveFile from '../../aws/s3/saveFile'
 
 const serializeAcmeUser = (data) =>
   saveFile(
-    config.get('s3-config-bucket'),
+    config['s3-config-bucket'],
     'letsencrypt',
-    config.get('acme-user-info-file'),
+    config['acme-user-info-file'],
     JSON.stringify({
       key: data.keypair,
       'url': data.location,

@@ -1,5 +1,4 @@
-import superAgentPromise from 'superagent-promise'
-const agent = superAgentPromise(require('superagent'), require('promise'))
+const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const parser = (res, callback) => {
   res.data = ''

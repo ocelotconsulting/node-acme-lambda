@@ -1,4 +1,3 @@
-import winston from 'winston'
 import getRoute53 from '../sdk/getRoute53'
 
 const updateTXTRecord = (hostedZoneId, domain, digest) => {
@@ -21,7 +20,7 @@ const updateTXTRecord = (hostedZoneId, domain, digest) => {
   }
   return getRoute53().changeResourceRecordSets(toSend).promise()
   .catch((e) => {
-    winston.error(`Couldn't write TXT record _acme-challenge.${domain}`)
+    console.log(`Couldn't write TXT record _acme-challenge.${domain}`)
     throw e
   })
 }

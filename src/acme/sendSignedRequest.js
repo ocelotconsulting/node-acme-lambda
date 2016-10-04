@@ -1,8 +1,6 @@
 import getNonce from './getNonce'
 import { RSA } from 'rsa-compat'
-
-import superAgentPromise from 'superagent-promise'
-const agent = superAgentPromise(require('superagent'), require('promise'))
+const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const sendSignedRequest = (payload, keypair, url) =>
   getNonce()

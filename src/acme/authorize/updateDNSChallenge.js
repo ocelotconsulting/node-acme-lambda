@@ -1,23 +1,23 @@
-import winston from 'winston'
 import updateTXTRecord from '../../aws/route53/updateTXTRecord'
 import getHostedZoneId from '../../aws/route53/getHostedZoneId'
 import { RSA } from 'rsa-compat'
-import base64 from 'urlsafe-base64'
 import crypto from 'crypto'
 import dns from 'dns'
-import config from 'config'
+import config from '../../../config/default.json'
 import promisify from 'es6-promisify'
 const resolveTxt = promisify(dns.resolveTxt)
 
 const getTokenDigest = (dnsChallenge, userKeyPair) =>
   crypto.createHash('sha256').update(`${dnsChallenge.token}.${RSA.thumbprint(userKeyPair)}`).digest()
 
+const urlB64 = (buffer) => buffer.toString('base64').replace(/[+]/g, '-').replace(/\//g, '_').replace(/=/g, '')
+
 const updateDNSChallenge = (dnsChallenge, userKeyPair) => {
   return getHostedZoneId()
-  .then((id) => updateTXTRecord(id, config.get('acme-site-key'), base64.encode(getTokenDigest(dnsChallenge, userKeyPair))))
+  .then((id) => updateTXTRecord(id, config['acme-site-key'], urlB64(getTokenDigest(dnsChallenge, userKeyPair))))
   .then((updated) => validateDNSChallenge(dnsChallenge, userKeyPair))
   .catch((e) => {
-    winston.error(`Couldn't write token digest to DNS record.`)
+    console.log(`Couldn't write token digest to DNS record.`)
     throw e
   })
 }
@@ -28,14 +28,14 @@ const delayPromise = (delay) => (data) =>
   })
 
 const dnsPreCheck = (expect) => (tryCount) =>
-  resolveTxt(`_acme-challenge.${config.get('acme-site-key')}`)
+  resolveTxt(`_acme-challenge.${config['acme-site-key']}`)
   .then((data) => ({
     tryCount: ++tryCount,
     result: (data[0][0] === expect)
   }))
 
 const validateDNSChallenge = (dnsChallenge, userKeyPair) =>
-  retry(0, dnsPreCheck(base64.encode(getTokenDigest(dnsChallenge, userKeyPair))))
+  retry(0, dnsPreCheck(urlB64(getTokenDigest(dnsChallenge, userKeyPair))))
   .then((data) => {
     if (data.result) {
       return data.result
@@ -45,9 +45,9 @@ const validateDNSChallenge = (dnsChallenge, userKeyPair) =>
   })
 
 const retry = (tryCount, promise) =>
-  promise(tryCount).then(delayPromise(config.get('acme-dns-retry-delay-ms')))
+  promise(tryCount).then(delayPromise(config['acme-dns-retry-delay-ms']))
   .then((data) =>
-    (tryCount < config.get('acme-dns-retry') && !data.result)
+    (tryCount < config['acme-dns-retry'] && !data.result)
       ? retry(data.tryCount, promise)
       : data
   )

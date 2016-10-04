@@ -1,4 +1,4 @@
-import config from 'config'
+import config from '../../../config/default.json'
 import sendSignedRequest from '../sendSignedRequest'
 
 const getChallenges = (keypair, authzUrl) =>
@@ -6,7 +6,7 @@ const getChallenges = (keypair, authzUrl) =>
     resource: 'new-authz',
     identifier: {
       type: 'dns',
-      value: config.get('acme-site-key')
+      value: config['acme-site-key']
     }
   }, keypair, authzUrl)
   .then((data) => Promise.resolve(data.body))

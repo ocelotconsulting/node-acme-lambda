@@ -1,9 +1,9 @@
-import config from 'config'
+import config from '../../../config/default.json'
 import saveFile from '../../aws/s3/saveFile'
 
 const serializeDomain = (data) =>
   saveFile(
-    config.get('s3-cert-bucket'),
+    config['s3-cert-bucket'],
     'letsencrypt',
     `letsencrypt_${data.domain}.json`,
     JSON.stringify({

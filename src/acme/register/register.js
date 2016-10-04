@@ -1,5 +1,4 @@
 import sendSignedRequest from '../sendSignedRequest'
-import _ from 'underscore'
 
 const toAgreement = (links) => {
   const match = /.*<(.*)>;rel="terms-of-service".*/.exec(links)
@@ -38,7 +37,7 @@ const register = (regUrl, email) => (keypair) =>
   }, keypair, regUrl)
   .then((data) => {
     return refreshRegistration(
-      _.extend({}, {
+      Object.assign({
         keypair: keypair,
         location: data.header['location']},
         toAgreement(data.header['link']))
