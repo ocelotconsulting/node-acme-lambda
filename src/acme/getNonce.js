@@ -1,14 +1,12 @@
-import winston from 'winston'
-import config from 'config'
-import superAgentPromise from 'superagent-promise'
-const agent = superAgentPromise(require('superagent'), require('promise'))
+import config from '../../config/default.json'
+const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const getNonce = () =>
-  agent.get(`${config.get('acme-directory-url')}/directory`)
+  agent.get(`${config['acme-directory-url']}/directory`)
   .end()
   .then((data) => Promise.resolve(data.header['replay-nonce']))
   .catch((e) => {
-    winston.error(`Error getting nonce ${JSON.stringify(e)}`)
+    console.log(`Error getting nonce ${JSON.stringify(e)}`)
     throw e
   })
 

@@ -1,9 +1,8 @@
-import config from 'config'
-import superAgentPromise from 'superagent-promise'
-const agent = superAgentPromise(require('superagent'), require('promise'))
+import config from '../../config/default.json'
+const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const getRegistrationUrls = (discoveryUrl) =>
-  agent.get(`${config.get('acme-directory-url')}/directory`)
+  agent.get(`${config['acme-directory-url']}/directory`)
   .then((data) => Promise.resolve(data.body))
 
 module.exports = getRegistrationUrls
