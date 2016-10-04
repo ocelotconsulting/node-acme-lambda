@@ -1,4 +1,4 @@
-import config from '../../config/default.json'
+const config = require('../../config/default.json')
 const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const getDiscoveryUrls = (discoveryUrl) =>

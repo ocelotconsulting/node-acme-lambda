@@ -1,5 +1,5 @@
-import sendSignedRequest from '../sendSignedRequest'
-import downloadBinary from '../../util/downloadBinary'
+const sendSignedRequest = require('../sendSignedRequest')
+const downloadBinary = require('../../util/downloadBinary')
 
 const toIssuerCert = (links) => {
   const match = /.*<(.*)>;rel="up".*/.exec(links)

@@ -1,6 +1,6 @@
-import config from '../../../config/default.json'
-import readFile from '../../aws/s3/readFile'
-import createAccount from './createAccount'
+const config = require('../../../config/default.json')
+const readFile = require('../../aws/s3/readFile')
+const createAccount = require('./createAccount')
 
 const getAccount = (regUrl) =>
   readFile(

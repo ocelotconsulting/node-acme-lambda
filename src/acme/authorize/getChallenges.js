@@ -1,6 +1,6 @@
-import sendSignedRequest from '../sendSignedRequest'
-import updateDNSChallenge from './updateDNSChallenge'
-import sendDNSChallengeValidation from './sendDNSChallengeValidation'
+const sendSignedRequest = require('../sendSignedRequest')
+const updateDNSChallenge = require('./updateDNSChallenge')
+const sendDNSChallengeValidation = require('./sendDNSChallengeValidation')
 
 const getDNSChallenge = (challenges) => challenges.find((challenge) => challenge.type === 'dns-01')
 

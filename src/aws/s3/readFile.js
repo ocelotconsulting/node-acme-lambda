@@ -1,4 +1,4 @@
-import getS3 from '../sdk/getS3'
+const getS3 = require('../sdk/getS3')
 
 const readFile = (bucket, siteId, fileName) =>
   getS3().getObject({

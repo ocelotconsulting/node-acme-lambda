@@ -1,6 +1,6 @@
-import config from '../../config/default.json'
-import readFile from '../aws/s3/readFile'
-import forge from 'node-forge'
+const config = require('../../config/default.json')
+const readFile = require('../aws/s3/readFile')
+const forge = require('node-forge')
 
 const diffDays = (certExpiration, now) =>
   Math.round(Math.abs((certExpiration.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)))

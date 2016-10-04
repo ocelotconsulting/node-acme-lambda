@@ -1,8 +1,8 @@
-import generateRSAKeyPair from '../../util/generateRSAKeyPair'
-import newCertificate from './newCertificate'
-import generateCSR from '../../util/generateCSR'
-import config from '../../../config/default.json'
-import saveFile from '../../aws/s3/saveFile'
+const generateRSAKeyPair = require('../../util/generateRSAKeyPair')
+const newCertificate = require('./newCertificate')
+const generateCSR = require('../../util/generateCSR')
+const config = require('../../../config/default.json')
+const saveFile = require('../../aws/s3/saveFile')
 
 const saveCertificate = (data) =>
   saveFile(

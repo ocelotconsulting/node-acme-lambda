@@ -1,6 +1,6 @@
-import {RSA} from 'rsa-compat'
-import promisify from 'es6-promisify'
-import config from '../../config/default.json'
+const RSA = require('rsa-compat').RSA
+const promisify = require('es6-promisify')
+const config = require('../../config/default.json')
 
 const bitlen = config['acme-account-key-bits']
 const exp = 65537
