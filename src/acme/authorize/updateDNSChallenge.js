@@ -14,7 +14,7 @@ const urlB64 = (buffer) => buffer.toString('base64').replace(/[+]/g, '-').replac
 
 const updateDNSChallenge = (dnsChallenge, userKeyPair) => {
   return getHostedZoneId()
-  .then((id) => updateTXTRecord(id, config['acme-site-key'], urlB64(getTokenDigest(dnsChallenge, userKeyPair))))
+  .then((id) => updateTXTRecord(id, config['acme-domain'], urlB64(getTokenDigest(dnsChallenge, userKeyPair))))
   .then((updated) => validateDNSChallenge(dnsChallenge, userKeyPair))
   .catch((e) => {
     console.log(`Couldn't write token digest to DNS record.`)
@@ -28,7 +28,7 @@ const delayPromise = (delay) => (data) =>
   })
 
 const dnsPreCheck = (expect) => (tryCount) =>
-  resolveTxt(`_acme-challenge.${config['acme-site-key']}`)
+  resolveTxt(`_acme-challenge.${config['acme-domain']}`)
   .then((data) => ({
     tryCount: ++tryCount,
     result: (data[0][0] === expect)

@@ -11,8 +11,8 @@ const certInValid = (cert, date) =>
 module.exports = (domain) =>
   readFile(
     config['s3-cert-bucket'],
-    'letsencrypt',
-    `letsencrypt_${domain}.json`
+    config['s3-folder'],
+    `${domain}.json`
   )
   .then((data) => {
     const domain = JSON.parse(data.Body.toString())

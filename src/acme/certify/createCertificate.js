@@ -3,7 +3,7 @@ import newCertificate from './newCertificate'
 import serializeDomain from './serializeDomain'
 import generateCSR from '../../util/generateCSR'
 
-const createDomain = (certUrl, authorizations, domain, userKeypair) =>
+const createCertificate = (certUrl, authorizations, domain, userKeypair) =>
   generateRSAKeyPair()
   .then((domainKeypair) =>
     generateCSR(domainKeypair, [domain])
@@ -18,4 +18,4 @@ const createDomain = (certUrl, authorizations, domain, userKeypair) =>
     )
   )
 
-module.exports = createDomain
+module.exports = createCertificate

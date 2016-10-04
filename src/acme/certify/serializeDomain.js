@@ -4,8 +4,8 @@ import saveFile from '../../aws/s3/saveFile'
 const serializeDomain = (data) =>
   saveFile(
     config['s3-cert-bucket'],
-    'letsencrypt',
-    `letsencrypt_${data.domain}.json`,
+    config['s3-folder'],
+    `${data.domain}.json`,
     JSON.stringify({
       key: data.keypair,
       cert: data.cert,

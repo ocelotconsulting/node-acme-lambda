@@ -1,7 +1,7 @@
 import { RSA } from 'rsa-compat'
 import sendSignedRequest from '../sendSignedRequest'
 
-const sendDNSChallengeValidationResponse = (dnsChallenge, userKeyPair) =>
+const sendDNSChallengeValidation = (dnsChallenge, userKeyPair) =>
     sendSignedRequest({
       resource: 'challenge',
       keyAuthorization: `${dnsChallenge.token}.${RSA.thumbprint(userKeyPair)}`
@@ -12,4 +12,4 @@ const sendDNSChallengeValidationResponse = (dnsChallenge, userKeyPair) =>
       throw e
     })
 
-module.exports = sendDNSChallengeValidationResponse
+module.exports = sendDNSChallengeValidation

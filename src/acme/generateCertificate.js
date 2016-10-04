@@ -1,18 +1,18 @@
-import getRegistrationUrls from './getRegistrationUrls'
+import getDiscoveryUrls from './getDiscoveryUrls'
 import getUser from './register/getUser'
 import getChallenges from './authorize/getChallenges'
 import validateChallenges from './authorize/validateChallenges'
-import getDomainCertificate from './certify/getDomainCertificate'
+import getCertificate from './certify/getCertificate'
 
 module.exports = () =>
-  getRegistrationUrls()
+  getDiscoveryUrls()
   .then((urls) =>
     getUser(urls['new-reg'])
     .then((account) =>
       getChallenges(account.key, urls['new-authz'])
       .then((challenges) =>
         validateChallenges(account.key, challenges)
-        .then(getDomainCertificate(urls['new-cert'], challenges.identifier.value, account.key))
+        .then(getCertificate(urls['new-cert'], challenges.identifier.value, account.key))
       )
     )
   )

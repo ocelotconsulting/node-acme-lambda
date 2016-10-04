@@ -6,7 +6,7 @@ const getChallenges = (keypair, authzUrl) =>
     resource: 'new-authz',
     identifier: {
       type: 'dns',
-      value: config['acme-site-key']
+      value: config['acme-domain']
     }
   }, keypair, authzUrl)
   .then((data) => Promise.resolve(data.body))
