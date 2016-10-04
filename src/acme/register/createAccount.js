@@ -1,7 +1,7 @@
-import generateRSAKeyPair from '../../util/generateRSAKeyPair'
-import register from './register'
-import saveFile from '../../aws/s3/saveFile'
-import config from '../../../config/default.json'
+const generateRSAKeyPair = require('../../util/generateRSAKeyPair')
+const register = require('./register')
+const saveFile = require('../../aws/s3/saveFile')
+const config = require('../../../config/default.json')
 
 const saveAccount = (data) =>
   saveFile(

@@ -1,4 +1,4 @@
-import getRoute53 from '../sdk/getRoute53'
+const getRoute53 = require('../sdk/getRoute53')
 
 const updateTXTRecord = (hostedZoneId, domain, digest) => {
   const toSend = {

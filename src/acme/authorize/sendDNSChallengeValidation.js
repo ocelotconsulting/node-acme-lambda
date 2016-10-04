@@ -1,5 +1,5 @@
-import { RSA } from 'rsa-compat'
-import sendSignedRequest from '../sendSignedRequest'
+const RSA = require('rsa-compat').RSA
+const sendSignedRequest = require('../sendSignedRequest')
 
 const sendDNSChallengeValidation = (dnsChallenge, acctKeyPair) =>
     sendSignedRequest({

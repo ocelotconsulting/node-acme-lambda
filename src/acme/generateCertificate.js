@@ -1,8 +1,8 @@
-import getDiscoveryUrls from './getDiscoveryUrls'
-import getAccount from './register/getAccount'
-import getChallenges from './authorize/getChallenges'
-import config from '../../config/default.json'
-import getCertificate from './certify/getCertificate'
+const getDiscoveryUrls = require('./getDiscoveryUrls')
+const getAccount = require('./register/getAccount')
+const getChallenges = require('./authorize/getChallenges')
+const config = require('../../config/default.json')
+const getCertificate = require('./certify/getCertificate')
 
 module.exports = () =>
   getDiscoveryUrls()

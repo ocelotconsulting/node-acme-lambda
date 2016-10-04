@@ -1,4 +1,4 @@
-import sendSignedRequest from '../sendSignedRequest'
+const sendSignedRequest = require('../sendSignedRequest')
 
 const toAgreement = (links) => {
   const match = /.*<(.*)>;rel="terms-of-service".*/.exec(links)

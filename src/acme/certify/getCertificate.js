@@ -1,6 +1,6 @@
-import config from '../../../config/default.json'
-import readFile from '../../aws/s3/readFile'
-import createCertificate from './createCertificate'
+const config = require('../../../config/default.json')
+const readFile = require('../../aws/s3/readFile')
+const createCertificate = require('./createCertificate')
 
 const getCertificate = (certUrl, domain, acctKeyPair) => (authorizations) =>
   readFile(

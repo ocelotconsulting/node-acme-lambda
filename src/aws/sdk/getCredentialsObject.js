@@ -1,4 +1,4 @@
-import config from '../../../config/default.json'
+const config = require('../../../config/default.json')
 
 module.exports = () => ({
   region: config['region'],

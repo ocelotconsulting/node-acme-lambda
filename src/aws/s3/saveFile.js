@@ -1,4 +1,4 @@
-import getS3 from '../sdk/getS3'
+const getS3 = require('../sdk/getS3')
 
 const saveFile = (bucket, siteId, fileName, fileData, options) =>
   getS3().putObject(Object.assign({

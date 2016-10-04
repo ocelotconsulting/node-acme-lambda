@@ -1,5 +1,5 @@
-import getRoute53 from '../sdk/getRoute53'
-import config from '../../../config/default.json'
+const getRoute53 = require('../sdk/getRoute53')
+const config = require('../../../config/default.json')
 
 const getDomainZone = (zones) =>
   zones.HostedZones.find((zone) => zone.Name === `${config['acme-domain']}.`)

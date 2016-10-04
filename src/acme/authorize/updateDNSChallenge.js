@@ -1,10 +1,10 @@
-import updateTXTRecord from '../../aws/route53/updateTXTRecord'
-import getHostedZoneId from '../../aws/route53/getHostedZoneId'
-import { RSA } from 'rsa-compat'
-import crypto from 'crypto'
-import dns from 'dns'
-import config from '../../../config/default.json'
-import promisify from 'es6-promisify'
+const updateTXTRecord = require('../../aws/route53/updateTXTRecord')
+const getHostedZoneId = require('../../aws/route53/getHostedZoneId')
+const RSA = require('rsa-compat').RSA
+const crypto = require('crypto')
+const dns = require('dns')
+const config = require('../../../config/default.json')
+const promisify = require('es6-promisify')
 const resolveTxt = promisify(dns.resolveTxt)
 
 const getTokenDigest = (dnsChallenge, acctKeyPair) =>
