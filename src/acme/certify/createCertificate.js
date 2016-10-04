@@ -1,15 +1,28 @@
 import generateRSAKeyPair from '../../util/generateRSAKeyPair'
 import newCertificate from './newCertificate'
-import serializeDomain from './serializeDomain'
 import generateCSR from '../../util/generateCSR'
+import config from '../../../config/default.json'
+import saveFile from '../../aws/s3/saveFile'
 
-const createCertificate = (certUrl, authorizations, domain, userKeypair) =>
+const saveCertificate = (data) =>
+  saveFile(
+    config['s3-cert-bucket'],
+    config['s3-folder'],
+    `${data.domain}.json`,
+    JSON.stringify({
+      key: data.keypair,
+      cert: data.cert,
+      issuerCert: data.issuerCert
+    })
+  )
+
+const createCertificate = (certUrl, authorizations, domain, acctKeyPair) =>
   generateRSAKeyPair()
   .then((domainKeypair) =>
     generateCSR(domainKeypair, [domain])
-    .then(newCertificate(userKeypair, authorizations, certUrl))
+    .then(newCertificate(acctKeyPair, authorizations, certUrl))
     .then((certData) =>
-      serializeDomain({
+      saveCertificate({
         domain,
         keypair: domainKeypair,
         cert: certData.cert,

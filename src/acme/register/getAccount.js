@@ -1,8 +1,8 @@
 import config from '../../../config/default.json'
 import readFile from '../../aws/s3/readFile'
-import createUser from './createUser'
+import createAccount from './createAccount'
 
-const getUser = (regUrl) =>
+const getAccount = (regUrl) =>
   readFile(
     config['s3-account-bucket'],
     config['s3-folder'],
@@ -11,7 +11,7 @@ const getUser = (regUrl) =>
   .then((data) => Promise.resolve(JSON.parse(data.Body.toString())))
   .catch((e) => {
     console.log(`Couldn't read user config file`)
-    return createUser(regUrl)
+    return createAccount(regUrl)
   })
 
-module.exports = getUser
+module.exports = getAccount

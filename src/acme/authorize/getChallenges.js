@@ -1,14 +1,25 @@
-import config from '../../../config/default.json'
 import sendSignedRequest from '../sendSignedRequest'
+import updateDNSChallenge from './updateDNSChallenge'
+import sendDNSChallengeValidation from './sendDNSChallengeValidation'
 
-const getChallenges = (keypair, authzUrl) =>
+const getDNSChallenge = (challenges) => challenges.find((challenge) => challenge.type === 'dns-01')
+
+const validateChallenges = (accountKeyPair, challengeResponse) => {
+  const dnsChallenge = getDNSChallenge(challengeResponse.challenges)
+  return Promise.all([
+    updateDNSChallenge(dnsChallenge, accountKeyPair)
+    .then((data) => sendDNSChallengeValidation(dnsChallenge, accountKeyPair))
+  ])
+}
+
+const getChallenges = (domain, keypair, authzUrl) =>
   sendSignedRequest({
     resource: 'new-authz',
     identifier: {
       type: 'dns',
-      value: config['acme-domain']
+      value: domain
     }
   }, keypair, authzUrl)
-  .then((data) => Promise.resolve(data.body))
+  .then((data) => validateChallenges(keypair, data.body))
 
 module.exports = getChallenges

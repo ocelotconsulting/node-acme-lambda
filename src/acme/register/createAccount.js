@@ -3,7 +3,7 @@ import register from './register'
 import saveFile from '../../aws/s3/saveFile'
 import config from '../../../config/default.json'
 
-const saveUser = (data) =>
+const saveAccount = (data) =>
   saveFile(
     config['s3-account-bucket'],
     config['s3-folder'],
@@ -15,9 +15,9 @@ const saveUser = (data) =>
     })
   )
 
-const createUser = (regUrl) =>
+const createAccount = (regUrl) =>
   generateRSAKeyPair()
   .then(register(regUrl, config['acme-account-email']))
-  .then(saveUser)
+  .then(saveAccount)
 
-module.exports = createUser
+module.exports = createAccount
