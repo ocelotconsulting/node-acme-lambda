@@ -30,7 +30,6 @@ your environment:
 | `s3-account-bucket`            | An S3 bucket to place account keys/config data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-cert-bucket`            | An S3 bucket to place domain certificate data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-folder`            | A folder within the above buckets to place the files under, in case there are other contents of these buckets.  |
-| `s3-folder`            | A folder within the above buckets to place the files under, in case there are other contents of these buckets.  |
 
 ## Execution
 Follow these steps to get started:
