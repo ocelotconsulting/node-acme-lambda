@@ -3,17 +3,20 @@ const register = require('./register')
 const saveFile = require('../../aws/s3/saveFile')
 const config = require('../../../config/default.json')
 
-const saveAccount = (data) =>
-  saveFile(
+const saveAccount = (data) => {
+  const account = {
+    key: data.keypair,
+    'url': data.location,
+    'agreement': data.agreement
+  }
+  return saveFile(
     config['s3-account-bucket'],
     config['s3-folder'],
     config['acme-account-file'],
-    JSON.stringify({
-      key: data.keypair,
-      'url': data.location,
-      'agreement': data.agreement
-    })
+    JSON.stringify(account)
   )
+  .then((saveResponse) => Promise.resolve(account))
+}
 
 const createAccount = (regUrl) =>
   generateRSAKeyPair()

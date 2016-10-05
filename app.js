@@ -1,15 +1,14 @@
-'use strict';
+const generateCertificate = require('./src/acme/generateCertificate')
+const isExpired = require('./src/util/isExpired')
+const config = require('./config/default.json')
 
-const express = require('express')
+const certificate = (options, context) =>
+  isExpired(config['acme-domain'])
+  .then((expired) =>
+    (expired
+      ? generateCertificate()
+      : Promise.resolve({msg: 'Certificate is still valid, going back to bed.'})))
+  .then((msg) => context.succeed(msg))
+  .catch((err) => context.succeed(`Received an error ${JSON.stringify(err)}`))
 
-const app = express()
-app.use('/certificate', require('./routes/certificate'))
-
-app.listen(process.env.PORT || 3000)
-
-// production error handler
-// no stacktraces leaked to user
-app.use((err, req, res, next) => {
-  res.status(err.status || 500)
-  res.send(JSON.stringify(err))
-})
+module.exports = { handler : certificate }

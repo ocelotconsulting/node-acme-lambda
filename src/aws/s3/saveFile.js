@@ -7,7 +7,7 @@ const saveFile = (bucket, siteId, fileName, fileData, options) =>
     Body: new Buffer(fileData)
   }, options)).promise()
   .catch((e) => {
-    console.log(`Couldn't write ${siteId}/${fileName}`)
+    console.log(`Couldn't write s3://${bucket}/${siteId}/${fileName}`)
     throw e
   })
 

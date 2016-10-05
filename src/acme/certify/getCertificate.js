@@ -10,7 +10,7 @@ const getCertificate = (certUrl, domain, acctKeyPair) => (authorizations) =>
   )
   .then((data) => Promise.resolve(JSON.parse(data.Body.toString())))
   .catch((e) => {
-    console.log(`Creating domain since couldn't read letsencrypt/${domain}.json`)
+    console.log(`Creating domain since couldn't read s3://${config['s3-cert-bucket']}/${config['s3-folder']}/${domain}.json`)
     return createCertificate(certUrl, authorizations, domain, acctKeyPair)
   })
 
