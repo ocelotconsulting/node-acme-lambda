@@ -4,7 +4,10 @@
   "description": "Free Lets-Encrypt certificate management for CloudFront/AWS written in nodejs",
   "main": "app.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node app"
+    "clean": "rm dist.zip || true && rm -rf build",
+    "dev": "cross-env NODE_ENV=development node app",
+    "dist": "mkdir build && npm install && npm prune --production && mv node_modules ./build && npm install && node zip.js",
+    "test": "node bin/local.js"
   },
   "keywords": [
     "letsencrypt",
@@ -23,6 +26,7 @@
     "superagent-promise": "^1.1.0"
   },
   "devDependencies": {
+    "archiver": "^1.1.0",
     "concurrently": "^2.2.0",
     "cross-env": "~1.0.8"
   }

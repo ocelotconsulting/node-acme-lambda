@@ -10,7 +10,7 @@ const getAccount = (regUrl) =>
   )
   .then((data) => Promise.resolve(JSON.parse(data.Body.toString())))
   .catch((e) => {
-    console.log(`Couldn't read user config file`)
+    console.log(`Creating user config file since couldn't read s3://${config['s3-account-bucket']}/${config['s3-folder']}/${config['acme-account-file']}`)
     return createAccount(regUrl)
   })
 
