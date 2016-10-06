@@ -8,8 +8,8 @@ const getCertificate = (certUrl, domain, acctKeyPair) => (authorizations) =>
     config['s3-folder'],
     `${domain}.json`
   )
-  .then((data) => Promise.resolve(JSON.parse(data.Body.toString())))
-  .catch((e) => {
+  .then((data) => JSON.parse(data.Body.toString()))
+  .catch(() => {
     console.log(`Creating domain since couldn't read s3://${config['s3-cert-bucket']}/${config['s3-folder']}/${domain}.json`)
     return createCertificate(certUrl, authorizations, domain, acctKeyPair)
   })

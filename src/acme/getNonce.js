@@ -4,7 +4,7 @@ const agent = require('superagent-promise')(require('superagent'), Promise)
 const getNonce = () =>
   agent.get(`${config['acme-directory-url']}/directory`)
   .end()
-  .then((data) => Promise.resolve(data.header['replay-nonce']))
+  .then((data) => data.header['replay-nonce'])
   .catch((e) => {
     console.log(`Error getting nonce ${JSON.stringify(e)}`)
     throw e

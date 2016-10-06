@@ -3,6 +3,6 @@ const agent = require('superagent-promise')(require('superagent'), Promise)
 
 const getDiscoveryUrls = (discoveryUrl) =>
   agent.get(`${config['acme-directory-url']}/directory`)
-  .then((data) => Promise.resolve(data.body))
+  .then((data) => data.body)
 
 module.exports = getDiscoveryUrls

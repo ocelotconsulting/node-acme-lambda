@@ -14,10 +14,9 @@ module.exports = (domain) =>
     config['s3-folder'],
     `${domain}.json`
   )
-  .then((data) => {
-    const domain = JSON.parse(data.Body.toString())
-    return Promise.resolve(certInValid(forge.pki.certificateFromPem(domain.cert), new Date()))
-  })
+  .then((data) =>
+    certInValid(forge.pki.certificateFromPem(JSON.parse(data.Body.toString()).cert), new Date())
+  )
   .catch((e) => {
     console.log(`Error while calculating cert expiration`)
     if (e.statusCode === 404) {
