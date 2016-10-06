@@ -15,7 +15,7 @@ const saveAccount = (data) => {
     config['acme-account-file'],
     JSON.stringify(account)
   )
-  .then((saveResponse) => account)
+  .then(() => account)
 }
 
 const createAccount = (regUrl) =>

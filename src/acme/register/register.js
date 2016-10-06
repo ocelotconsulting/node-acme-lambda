@@ -35,13 +35,14 @@ const register = (regUrl, email) => (keypair) =>
     resource: 'new-reg',
     contact: [ `mailto:${email}` ]
   }, keypair, regUrl)
-  .then((data) => {
-    return refreshRegistration(
+  .then((data) =>
+    refreshRegistration(
       Object.assign({
         keypair: keypair,
-        location: data.header['location']},
-        toAgreement(data.header['link']))
+        location: data.header['location']
+      },
+      toAgreement(data.header['link']))
     )
-  })
+  )
 
 module.exports = register
