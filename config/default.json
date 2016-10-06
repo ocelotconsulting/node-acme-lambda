@@ -4,7 +4,7 @@
   "s3-folder": "<folder-under-bucket>",
   "acme-dns-retry": 30,
   "acme-dns-retry-delay-ms": 2000,
-  "acme-domain": "<domain-needing-certificate>",
+  "acme-domains": ["<domain-needing-certificate>", "<optional-second-domain>"],
   "acme-account-file": "<where-to-save-generated-account-registration>",
   "acme-account-email": "<email-of-responsible-person>",
   "acme-account-key-bits": 2048,
