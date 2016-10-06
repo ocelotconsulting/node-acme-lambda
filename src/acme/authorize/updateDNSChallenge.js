@@ -12,15 +12,14 @@ const getTokenDigest = (dnsChallenge, acctKeyPair) =>
 
 const urlB64 = (buffer) => buffer.toString('base64').replace(/[+]/g, '-').replace(/\//g, '_').replace(/=/g, '')
 
-const updateDNSChallenge = (dnsChallenge, acctKeyPair) => {
-  return getHostedZoneId()
+const updateDNSChallenge = (dnsChallenge, acctKeyPair) =>
+  getHostedZoneId()
   .then((id) => updateTXTRecord(id, config['acme-domain'], urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
   .then((updated) => validateDNSChallenge(dnsChallenge, acctKeyPair))
   .catch((e) => {
     console.log(`Couldn't write token digest to DNS record.`)
     throw e
   })
-}
 
 const delayPromise = (delay) => (data) =>
   new Promise((resolve, reject) => {
