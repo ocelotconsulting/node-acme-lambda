@@ -9,22 +9,27 @@ const testContext = {
   }
 }
 
-const getPEMs = (sync) =>
+const getPEMsForDomain = (domain) =>
   readFile(
     config['s3-cert-bucket'],
     config['s3-folder'],
-    `${config['acme-domain']}.json`
+    `${domain}.json`
   )
   .then((data) => JSON.parse(data.Body.toString()))
   .then((certJSON) => {
-    console.log('About to write PEM files..')
+    console.log(`About to write PEM files for ${domain}..`)
     try {
-      fs.writeFileSync(`./${config['acme-domain']}.pem`, certJSON.cert.toString())
-      fs.writeFileSync(`./${config['acme-domain']}-chain.pem`, certJSON.issuerCert.toString())
+      fs.writeFileSync(`./${domain}.pem`, certJSON.cert.toString())
+      fs.writeFileSync(`./${domain}-chain.pem`, certJSON.issuerCert.toString())
     } catch (e) {
       console.log(JSON.stringify(e.stack))
     }
-    sync.succeed('Wrote PEM files..')
   })
+  .catch()
 
-getPEMs(testContext)
+const getAllPEMs = (sync) =>
+  Promise.all(config['acme-domains'].map(getPEMsForDomain))
+  .then(() => sync.succeed('Wrote PEM files..'))
+
+
+getAllPEMs(testContext)
