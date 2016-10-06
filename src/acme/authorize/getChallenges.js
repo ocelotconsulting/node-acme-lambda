@@ -8,7 +8,7 @@ const validateChallenges = (accountKeyPair, challengeResponse) => {
   const dnsChallenge = getDNSChallenge(challengeResponse.challenges)
   return Promise.all([
     updateDNSChallenge(dnsChallenge, accountKeyPair)
-    .then((data) => sendDNSChallengeValidation(dnsChallenge, accountKeyPair))
+    .then(() => sendDNSChallengeValidation(dnsChallenge, accountKeyPair))
   ])
 }
 

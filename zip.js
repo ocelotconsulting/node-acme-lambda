@@ -8,7 +8,7 @@ output.on('close', () => {
 const zipfile = archiver('zip')
 zipfile.on('error', (err) => {
   throw err
-});
+})
 zipfile.pipe(output)
 zipfile.bulk([
   { expand: true, cwd: './/', src: ['app.js'] },

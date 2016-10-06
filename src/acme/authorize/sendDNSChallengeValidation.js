@@ -6,7 +6,7 @@ const sendDNSChallengeValidation = (dnsChallenge, acctKeyPair) =>
       resource: 'challenge',
       keyAuthorization: `${dnsChallenge.token}.${RSA.thumbprint(acctKeyPair)}`
     }, acctKeyPair, dnsChallenge.uri)
-    .then((data) => Promise.resolve(data.body))
+    .then((data) => data.body)
     .catch((e) => {
       console.log(`Couldn't send DNS challenge verification ${JSON.stringify(e)}.`)
       throw e

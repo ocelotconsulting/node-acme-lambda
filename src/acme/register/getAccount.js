@@ -8,8 +8,8 @@ const getAccount = (regUrl) =>
     config['s3-folder'],
     config['acme-account-file']
   )
-  .then((data) => Promise.resolve(JSON.parse(data.Body.toString())))
-  .catch((e) => {
+  .then((data) => JSON.parse(data.Body.toString()))
+  .catch(() => {
     console.log(`Creating user config file since couldn't read s3://${config['s3-account-bucket']}/${config['s3-folder']}/${config['acme-account-file']}`)
     return createAccount(regUrl)
   })

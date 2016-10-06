@@ -24,7 +24,7 @@ your environment:
 
 | *Variable*                 | *Description*         |
 | :--------------------- |:--------------|
-| `acme-directory-url`            | Change to production url - https://acme-v01.api.letsencrypt.org/directory if ready for real certificate.  |
+| `acme-directory-url`            | Change to production url - https://acme-v01.api.letsencrypt.org if ready for real certificate.  |
 | `acme-domain`            | Domain to receive certificate for.  |
 | `acme-account-email`            | Email of user requesting certificate.  |
 | `s3-account-bucket`            | An S3 bucket to place account keys/config data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
@@ -49,3 +49,7 @@ Follow these steps to get started:
         $ npm run dist
 
 5. Create lambda by uploading zip, and establish your desired trigger (i.e. periodic).
+
+Optional: You can write your certificates to a PEM file by executing:
+
+        $ npm run pems

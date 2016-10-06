@@ -31,7 +31,7 @@ const newCertificate = (keypair, authorizations, certUrl) => (csr) =>
     .then((certificate) =>
       downloadBinary(toIssuerCert(data.header['link']))
       .then((issuerCert) =>
-        Promise.resolve({
+        ({
           cert: toPEM(certificate),
           issuerCert: toPEM(issuerCert)
         })

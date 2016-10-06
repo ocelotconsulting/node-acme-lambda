@@ -7,7 +7,7 @@ const certificate = (options, context) =>
   .then((expired) =>
     (expired
       ? generateCertificate()
-      : Promise.resolve({msg: 'Certificate is still valid, going back to bed.'})))
+      : {msg: 'Certificate is still valid, going back to bed.'}))
   .then((msg) => context.succeed(msg))
   .catch((err) => context.succeed(`Received an error ${JSON.stringify(err)}`))
 
