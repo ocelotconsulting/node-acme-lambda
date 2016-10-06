@@ -4,10 +4,10 @@ const sendDNSChallengeValidation = require('./sendDNSChallengeValidation')
 
 const getDNSChallenge = (challenges) => challenges.find((challenge) => challenge.type === 'dns-01')
 
-const validateChallenges = (accountKeyPair, challengeResponse) => {
+const validateChallenges = (domain, accountKeyPair, challengeResponse) => {
   const dnsChallenge = getDNSChallenge(challengeResponse.challenges)
   return Promise.all([
-    updateDNSChallenge(dnsChallenge, accountKeyPair)
+    updateDNSChallenge(domain, dnsChallenge, accountKeyPair)
     .then(() => sendDNSChallengeValidation(dnsChallenge, accountKeyPair))
   ])
 }
@@ -20,6 +20,6 @@ const getChallenges = (domain, keypair, authzUrl) =>
       value: domain
     }
   }, keypair, authzUrl)
-  .then((data) => validateChallenges(keypair, data.body))
+  .then((data) => validateChallenges(domain, keypair, data.body))
 
 module.exports = getChallenges

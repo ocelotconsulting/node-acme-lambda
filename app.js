@@ -2,13 +2,26 @@ const generateCertificate = require('./src/acme/generateCertificate')
 const isExpired = require('./src/util/isExpired')
 const config = require('./config/default.json')
 
-const certificate = (options, context) =>
-  isExpired(config['acme-domain'])
+const single = (domain) =>
+  isExpired(domain)
   .then((expired) =>
     (expired
-      ? generateCertificate()
-      : {msg: 'Certificate is still valid, going back to bed.'}))
-  .then((msg) => context.succeed(msg))
-  .catch((err) => context.succeed(`Received an error ${JSON.stringify(err)}`))
+      ? generateCertificate(domain)
+      : {
+          err: false,
+          msg: `Certificate for ${domain} is still valid, going back to bed.`
+        }
+    )
+  )
+  .catch((err) => ({
+    err: true,
+    msg: `Updating cert for ${domain}, received err ${err}, ${err.stack}`
+  }))
 
-module.exports = { handler : certificate }
+const certificates = (domains) => domains.map(single)
+
+const updateCertificates = (options, context) =>
+  Promise.all(certificates(config['acme-domains']))
+  .then((msgs) => context.succeed(msgs))
+
+module.exports = { handler : updateCertificates }

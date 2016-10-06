@@ -4,12 +4,12 @@ const getChallenges = require('./authorize/getChallenges')
 const config = require('../../config/default.json')
 const getCertificate = require('./certify/getCertificate')
 
-module.exports = () =>
+module.exports = (domain) =>
   getDiscoveryUrls()
   .then((urls) =>
     getAccount(urls['new-reg'])
     .then((account) =>
-      getChallenges(config['acme-domain'], account.key, urls['new-authz'])
-      .then(getCertificate(urls['new-cert'], config['acme-domain'], account.key))
+      getChallenges(domain, account.key, urls['new-authz'])
+      .then(getCertificate(urls['new-cert'], domain, account.key))
     )
   )

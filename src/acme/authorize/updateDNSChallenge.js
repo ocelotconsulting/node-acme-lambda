@@ -12,10 +12,10 @@ const getTokenDigest = (dnsChallenge, acctKeyPair) =>
 
 const urlB64 = (buffer) => buffer.toString('base64').replace(/[+]/g, '-').replace(/\//g, '_').replace(/=/g, '')
 
-const updateDNSChallenge = (dnsChallenge, acctKeyPair) =>
-  getHostedZoneId()
-  .then((id) => updateTXTRecord(id, config['acme-domain'], urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
-  .then((updated) => validateDNSChallenge(dnsChallenge, acctKeyPair))
+const updateDNSChallenge = (domain, dnsChallenge, acctKeyPair) =>
+  getHostedZoneId(domain)
+  .then((id) => updateTXTRecord(id, domain, urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
+  .then((updated) => validateDNSChallenge(domain, dnsChallenge, acctKeyPair))
   .catch((e) => {
     console.log(`Couldn't write token digest to DNS record.`)
     throw e
@@ -26,15 +26,15 @@ const delayPromise = (delay) => (data) =>
     setTimeout(() => { resolve(data) }, delay)
   })
 
-const dnsPreCheck = (expect) => (tryCount) =>
-  resolveTxt(`_acme-challenge.${config['acme-domain']}`)
+const dnsPreCheck = (domain, expect) => (tryCount) =>
+  resolveTxt(`_acme-challenge.${domain}`)
   .then((data) => ({
     tryCount: ++tryCount,
     result: (data[0][0] === expect)
   }))
 
-const validateDNSChallenge = (dnsChallenge, acctKeyPair) =>
-  retry(0, dnsPreCheck(urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
+const validateDNSChallenge = (domain, dnsChallenge, acctKeyPair) =>
+  retry(0, dnsPreCheck(domain, urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
   .then((data) => {
     if (data.result) {
       return data.result
