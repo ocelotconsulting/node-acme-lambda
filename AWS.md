@@ -1,7 +1,8 @@
 # AWS Configuration
 
 ## IAM
-In order to use this project as a Lambda, it needs to be assigned a role which
+In addition to the AWSLambdaBasicExecutionRole (for CloudWatch logging), the
+lambda function also needs to be assigned a role which
 has permissions to write to Route53 (to satisfy Lets-Encrypt DNS challenge) and
 to read/write to the S3 buckets it is configured for for user registration and
 domain certificate files.
