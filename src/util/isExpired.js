@@ -18,9 +18,10 @@ module.exports = (domain) =>
     certInValid(forge.pki.certificateFromPem(JSON.parse(data.Body.toString()).cert), new Date())
   )
   .catch((e) => {
-    console.log(`Error while calculating cert expiration`)
     if (e.statusCode === 404) {
+      console.log(`Certificate is missing, going to regenerate.`)
       return true
     }
+    console.log(`Error while calculating cert expiration`)
     throw e
   })
