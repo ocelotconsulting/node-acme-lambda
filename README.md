@@ -53,3 +53,6 @@ Follow these steps to get started:
 *Optional*: You can write your certificates to a PEM file by executing:
 
         $ npm run pems
+
+## Disclaimer
+Currently the initial DNS propagation for the domain can take a little while (2-3 minutes). Once that happens, subsequent writes to the DNS TXT record for the domain occur much more quickly. If you receive an error about `queryTxt ENOTFOUND _acme-challenge.<DOMAIN>` initially, try again.

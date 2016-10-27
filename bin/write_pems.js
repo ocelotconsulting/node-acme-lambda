@@ -21,6 +21,7 @@ const getPEMsForDomain = (domain) =>
     try {
       fs.writeFileSync(`./${domain}.pem`, certJSON.cert.toString())
       fs.writeFileSync(`./${domain}-chain.pem`, certJSON.issuerCert.toString())
+      fs.writeFileSync(`./${domain}-key.pem`, certJSON.key.privateKeyPem.toString())
     } catch (e) {
       console.log(JSON.stringify(e.stack))
     }
