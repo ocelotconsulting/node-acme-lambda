@@ -14,7 +14,36 @@ const saveCertificate = (data) =>
       cert: data.cert,
       issuerCert: data.issuerCert
     })
+  ).then(
+    saveFile(
+      config['s3-cert-bucket'],
+      config['s3-folder'],
+      `${data.domain}-cert.pem`,
+      data.cert.toString()
+    )
+  ).then(
+    saveFile(
+      config['s3-cert-bucket'],
+      config['s3-folder'],
+      `${data.domain}-chain.pem`,
+      data.issuerCert.toString()
+    )
+  ).then(
+    saveFile(
+      config['s3-cert-bucket'],
+      config['s3-folder'],
+      `${data.domain}-privkey.pem`,
+      data.keypair.privateKeyPem.toString()
+    )
+  ).then(
+    saveFile(
+      config['s3-cert-bucket'],
+      config['s3-folder'],
+      `${data.domain}-fullchain.pem`,
+      data.cert.toString() + data.issuerCert.toString()
+    )
   )
+
 
 const createCertificate = (certUrl, authorizations, domain, acctKeyPair) =>
   generateRSAKeyPair()
