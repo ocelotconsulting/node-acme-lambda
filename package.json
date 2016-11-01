@@ -14,7 +14,7 @@
     "pems": "node bin/write_pems.js",
     "local-cert": "node bin/local.js",
     "test": "node -e \"function noop(){}\"",
-    "install": ". ./deploy.sh"
+    "deploy": ". ./deploy.sh"
   },
   "keywords": [
     "letsencrypt",
