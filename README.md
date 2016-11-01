@@ -42,7 +42,7 @@ Follow these steps to get started:
 
 3. Create S3 buckets, IAM role, then test locally:
 
-        $ npm run test
+        $ npm run local-cert
 
 4. Package lambda zip:
 

@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "Free Lets-Encrypt certificate management for CloudFront/AWS written in nodejs",
   "main": "app.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/ocelotconsulting/node-letsencrypt-lambda.git"
+  },
   "scripts": {
     "clean": "rm dist.zip || true && rm -rf build",
     "dev": "cross-env NODE_ENV=development node app",
     "dist": "mkdir build && npm install && npm prune --production && mv node_modules ./build && npm install && node zip.js",
     "pems": "node bin/write_pems.js",
-    "test": "node bin/local.js"
+    "local-cert": "node bin/local.js",
+    "test": "node -e \"function noop(){}\"",
+    "install": ". ./deploy.sh"
   },
   "keywords": [
     "letsencrypt",
@@ -27,6 +33,7 @@
   },
   "devDependencies": {
     "archiver": "^1.1.0",
+    "aws-sdk-cli": "^0.0.3",
     "concurrently": "^2.2.0",
     "cross-env": "~1.0.8"
   }
