@@ -8,7 +8,7 @@
     "url" : "https://github.com/ocelotconsulting/node-letsencrypt-lambda.git"
   },
   "scripts": {
-    "clean": "rm dist.zip || true && rm -rf build",
+    "clean": "rm dist*.zip || true && rm -rf build",
     "dev": "cross-env NODE_ENV=development node app",
     "dist": "mkdir build && npm install && npm prune --production && mv node_modules ./build && npm install && node zip.js",
     "pems": "node bin/write_pems.js",

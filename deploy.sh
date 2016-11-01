@@ -5,7 +5,7 @@ timestamp() {
 }
 
 dist_file=dist-`timestamp`.zip
-
+printenv
 npm run clean
 echo $letsencrypt_config > ./config/default.json
 npm run dist
