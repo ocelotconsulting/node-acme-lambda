@@ -35,8 +35,7 @@ const dnsPreCheck = (domain, expect) => (tryCount) =>
   .catch((e) => {
     if (e.code === 'ENODATA' || e.code === 'ENOTFOUND') {
       return { tryCount: ++tryCount, result: false }
-    }
-    else { throw e }
+    } else { throw e }
   })
 
 const validateDNSChallenge = (domain, dnsChallenge, acctKeyPair) =>

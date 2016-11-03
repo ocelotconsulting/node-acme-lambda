@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Free Lets-Encrypt certificate management for CloudFront/AWS written in nodejs",
   "main": "app.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/ocelotconsulting/node-letsencrypt-lambda.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocelotconsulting/node-letsencrypt-lambda.git"
   },
   "scripts": {
     "clean": "rm dist*.zip || true && rm -rf build",
-    "dev": "cross-env NODE_ENV=development node app",
     "dist": "mkdir build && npm install && npm prune --production && mv node_modules ./build && npm install && node zip.js",
     "pems": "node bin/write_pems.js",
     "local-cert": "node bin/local.js",
@@ -26,15 +25,21 @@
   "dependencies": {
     "aws-sdk": "~2.4.14",
     "es6-promisify": "^4.1.0",
-    "node-forge": "^0.6.42",
+    "node-forge": "^0.6.45",
     "rsa-compat": "^1.2.7",
     "superagent": "~1.8.4",
     "superagent-promise": "^1.1.0"
   },
   "devDependencies": {
-    "archiver": "^1.1.0",
+    "archiver": "^1.2.0",
     "aws-sdk-cli": "^0.0.3",
-    "concurrently": "^2.2.0",
-    "cross-env": "~1.0.8"
+    "eslint": "^3.8.0",
+    "eslint-config": "^0.3.0",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-promise": "^3.0.0",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "engines": {
+    "npm": "4.3.2"
   }
 }
