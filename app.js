@@ -8,9 +8,9 @@ const single = (domain) =>
     (expired
       ? generateCertificate(domain)
       : {
-          err: false,
-          msg: `Certificate for ${domain} is still valid, going back to bed.`
-        }
+        err: false,
+        msg: `Certificate for ${domain} is still valid, going back to bed.`
+      }
     )
   )
   .catch((err) => ({

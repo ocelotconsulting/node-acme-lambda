@@ -16,7 +16,7 @@ const saveCertificate = (data) =>
     })
   )
 
-const createCertificate = (certUrl, authorizations, domain, acctKeyPair) =>
+const createCertificate = (certUrl, domain, acctKeyPair) => (authorizations) =>
   generateRSAKeyPair()
   .then((domainKeypair) =>
     generateCSR(domainKeypair, [domain])
