@@ -1,3 +1,3 @@
 const AWS = require('aws-sdk')
-
-module.exports = () => new AWS.S3()
+// see https://github.com/ocelotconsulting/node-letsencrypt-lambda/issues/9
+module.exports = () => new AWS.S3({signatureVersion: 'v4'})
