@@ -1,4 +1,4 @@
-const agent = require('superagent-promise')(require('superagent'), Promise)
+const agent = require('superagent')
 
 const parser = (res, callback) => {
   res.data = ''
@@ -13,5 +13,5 @@ const parser = (res, callback) => {
 
 module.exports = (url) =>
   agent.get(url)
-  .buffer(true).parse(parser).end()
+  .buffer(true).parse(parser)
   .then((data) => data.body)

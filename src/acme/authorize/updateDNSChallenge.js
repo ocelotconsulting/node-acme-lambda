@@ -17,7 +17,7 @@ const updateDNSChallenge = (domain, dnsChallenge, acctKeyPair) =>
   .then((id) => updateTXTRecord(id, domain, urlB64(getTokenDigest(dnsChallenge, acctKeyPair))))
   .then((updated) => validateDNSChallenge(domain, dnsChallenge, acctKeyPair))
   .catch((e) => {
-    console.log(`Couldn't write token digest to DNS record.`)
+    console.error(`Couldn't write token digest to DNS record.`, e)
     throw e
   })
 

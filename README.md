@@ -25,11 +25,11 @@ your environment:
 | *Variable*                 | *Description*         |
 | :--------------------- |:--------------|
 | `acme-directory-url`            | Change to production url - https://acme-v01.api.letsencrypt.org if ready for real certificate.  |
-| `acme-domains`            | Array of domains to receive certificates for.  |
 | `acme-account-email`            | Email of user requesting certificate.  |
 | `s3-account-bucket`            | An S3 bucket to place account keys/config data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-cert-bucket`            | An S3 bucket to place domain certificate data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-folder`            | A folder within the above buckets to place the files under, in case there are other contents of these buckets.  |
+| `certificate-info`            | Object containing certificate information mapping certificate names to domains.  |
 
 ## Execution
 Follow these steps to get started:

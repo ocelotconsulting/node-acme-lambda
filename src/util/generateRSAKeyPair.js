@@ -10,7 +10,7 @@ const generateKeyPair = promisify(RSA.generateKeypair)
 const generatePair = () =>
   generateKeyPair(bitlen, exp, options)
   .catch((e) => {
-    console.log(`Couldn't generate RSA keypair, error ${JSON.stringify(e)}`)
+    console.error(`Couldn't generate RSA keypair`, e)
     throw e
   })
 

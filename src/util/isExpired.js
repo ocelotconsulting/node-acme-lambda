@@ -8,20 +8,20 @@ const diffDays = (certExpiration, now) =>
 const certInValid = (cert, date) =>
   (cert.notBefore > date > cert.notAfter || diffDays(new Date(cert.validity.notAfter), date) < 30)
 
-module.exports = (domain) =>
+module.exports = (certKey) =>
   readFile(
     config['s3-cert-bucket'],
     config['s3-folder'],
-    `${domain}.json`
+    `${certKey}.json`
   )
   .then((data) =>
     certInValid(forge.pki.certificateFromPem(JSON.parse(data.Body.toString()).cert), new Date())
   )
   .catch((e) => {
     if (e.statusCode === 404) {
-      console.log(`Certificate is missing, going to regenerate.`)
+      console.log('Certificate is missing, going to regenerate.')
       return true
     }
-    console.log(`Error while calculating cert expiration`)
+    console.error('Error while calculating cert expiration', e)
     throw e
   })

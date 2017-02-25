@@ -8,7 +8,7 @@ const saveCertificate = (data) =>
   saveFile(
     config['s3-cert-bucket'],
     config['s3-folder'],
-    `${data.domain}.json`,
+    `${data.key}.json`,
     JSON.stringify({
       key: data.keypair,
       cert: data.cert,
@@ -16,14 +16,14 @@ const saveCertificate = (data) =>
     })
   )
 
-const createCertificate = (certUrl, domain, acctKeyPair) => (authorizations) =>
+const createCertificate = (certUrl, certInfo, acctKeyPair) => (authorizations) =>
   generateRSAKeyPair()
   .then((domainKeypair) =>
-    generateCSR(domainKeypair, [domain])
+    generateCSR(domainKeypair, certInfo.domains)
     .then(newCertificate(acctKeyPair, authorizations, certUrl))
     .then((certData) =>
       saveCertificate({
-        domain,
+        key: certInfo.key,
         keypair: domainKeypair,
         cert: certData.cert,
         issuerCert: certData.issuerCert

@@ -1,10 +1,10 @@
-var cert = require("../app.js")
+const cert = require('../app.js')
 
-var testContext = {
-  succeed: function succeed(data) {
+const testContext = {
+  succeed: (data) => {
     console.log(data)
     process.exit(0)
   }
-};
+}
 
 cert.handler({}, testContext)

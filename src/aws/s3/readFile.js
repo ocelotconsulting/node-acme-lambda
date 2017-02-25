@@ -6,7 +6,7 @@ const readFile = (bucket, siteId, fileName) =>
     Key: `${siteId}/${fileName}`
   }).promise()
   .catch((e) => {
-    console.log(`Couldn't read s3://${bucket}/${siteId}/${fileName}`)
+    console.error(`Couldn't read s3://${bucket}/${siteId}/${fileName}`, e)
     throw e
   })
 

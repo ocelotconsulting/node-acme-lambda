@@ -8,7 +8,7 @@ const sendDNSChallengeValidation = (dnsChallenge, acctKeyPair) =>
     }, acctKeyPair, dnsChallenge.uri)
     .then((data) => data.body)
     .catch((e) => {
-      console.log(`Couldn't send DNS challenge verification ${JSON.stringify(e)}.`)
+      console.error(`Couldn't send DNS challenge verification.`, e)
       throw e
     })
 

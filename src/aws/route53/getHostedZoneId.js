@@ -7,7 +7,7 @@ const getHostedZoneId = (domain) =>
   getRoute53().listHostedZones().promise()
   .then((zones) => getDomainZone(domain.split('.').slice(-2).join('.'), zones).Id)
   .catch((e) => {
-    console.log(`Couldn't retrieve hosted zones from Route53`)
+    console.error(`Couldn't retrieve hosted zones from Route53`, e)
     throw e
   })
 

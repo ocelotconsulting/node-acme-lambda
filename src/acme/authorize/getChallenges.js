@@ -12,14 +12,22 @@ const validateChallenges = (domain, accountKeyPair, challengeResponse) => {
   ])
 }
 
-const getChallenges = (domain, keypair, authzUrl) =>
-  sendSignedRequest({
-    resource: 'new-authz',
-    identifier: {
-      type: 'dns',
-      value: domain
-    }
-  }, keypair, authzUrl)
-  .then((data) => validateChallenges(domain, keypair, data.body))
+const getChallenges = (domains, keypair, authzUrl) =>
+  Promise.all(
+    domains.map((domain) =>
+      sendSignedRequest({
+        resource: 'new-authz',
+        identifier: {
+          type: 'dns',
+          value: domain
+        }
+      }, keypair, authzUrl)
+      .then((data) => validateChallenges(domain, keypair, data.body))
+    )
+  )
+  .catch((err) => {
+    console.error('Experienced error getting challenges', err)
+    throw err
+  })
 
 module.exports = getChallenges

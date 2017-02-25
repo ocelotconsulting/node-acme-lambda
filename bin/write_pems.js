@@ -3,34 +3,33 @@ const config = require('../config/default.json')
 const fs = require('fs')
 
 const testContext = {
-  succeed: function succeed(data) {
+  succeed: (data) => {
     console.log(data)
     process.exit(0)
   }
 }
 
-const getPEMsForDomain = (domain) =>
+const getPEMsForCertInfo = (key) =>
   readFile(
     config['s3-cert-bucket'],
     config['s3-folder'],
-    `${domain}.json`
+    `${key}.json`
   )
   .then((data) => JSON.parse(data.Body.toString()))
   .then((certJSON) => {
-    console.log(`About to write PEM files for ${domain}..`)
+    console.log(`About to write PEM files for ${key}..`)
     try {
-      fs.writeFileSync(`./${domain}.pem`, certJSON.cert.toString())
-      fs.writeFileSync(`./${domain}-chain.pem`, certJSON.issuerCert.toString())
-      fs.writeFileSync(`./${domain}-key.pem`, certJSON.key.privateKeyPem.toString())
+      fs.writeFileSync(`./${key}.pem`, certJSON.cert.toString())
+      fs.writeFileSync(`./${key}-chain.pem`, certJSON.issuerCert.toString())
+      fs.writeFileSync(`./${key}-key.pem`, certJSON.key.privateKeyPem.toString())
     } catch (e) {
-      console.log(JSON.stringify(e.stack))
+      console.error('Error writing pem files', e)
     }
   })
   .catch()
 
 const getAllPEMs = (sync) =>
-  Promise.all(config['acme-domains'].map(getPEMsForDomain))
+  Promise.all(Object.keys(config['certificate-info']).map(getPEMsForCertInfo))
   .then(() => sync.succeed('Wrote PEM files..'))
-
 
 getAllPEMs(testContext)

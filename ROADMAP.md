@@ -13,4 +13,4 @@ Please feel free to file issues on this repository if you have questions, concer
 * ~~"                                                               " ELB's.~~
 ~~* Different run modes: local file writing via nodejs vs Lambda + S3.~~
 * Tests
-* Support SAN in same certificate (let's encrypt allows up to 100 names per certificate)
+* ~~Support SAN in same certificate (let's encrypt allows up to 100 names per certificate)~~
