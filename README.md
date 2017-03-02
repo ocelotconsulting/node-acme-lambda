@@ -48,7 +48,7 @@ Follow these steps to get started:
 
         $ npm run dist
 
-5. Create lambda by uploading zip, and establish your desired trigger (i.e. periodic).
+5. Create lambda by uploading zip, set the handler to "app.handler", and establish your desired trigger (i.e. periodic).
 
 *Optional*: You can write your certificates to a PEM file by executing:
 
