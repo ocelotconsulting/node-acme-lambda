@@ -53,3 +53,10 @@ Follow these steps to get started:
 *Optional*: You can write your certificates to a PEM file by executing:
 
         $ npm run pems
+
+### `certificate-info` field of [configuration file](./config/default.json)
+
+- Certificate names are keys of JSON object, denoting sets of sub/domains to use as SAN names in certificate.
+- Value of certificate name keys is array of sub/domains, which can contain either:
+  - a string (default, looks for route53 hosted zone with 2 levels)
+  - or an object, with both `name` and `zoneLevels` defined, allowing hosted zones at levels greater than 2 (i.e. `host.at.longer.domain.com` could specify 4 zone levels, which would require proper NS records in parent Route53 hosted zone or other DNS).

@@ -19,7 +19,7 @@ module.exports = (certKey) =>
   )
   .catch((e) => {
     if (e.statusCode === 404) {
-      console.log('Certificate is missing, going to regenerate.')
+      console.log(`Certificate with key ${certKey} is missing, going to regenerate.`)
       return true
     }
     console.error('Error while calculating cert expiration', e)

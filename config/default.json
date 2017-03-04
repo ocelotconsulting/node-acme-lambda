@@ -3,7 +3,7 @@
   "s3-cert-bucket": "<your-s3-ssl-cert-bucket>",
   "s3-folder": "<folder-under-bucket>",
   "certificate-info": {
-    "cert-name1": ["<first-domain-needing-certificate>", "<second-domain-needing-certificate>"],
+    "cert-name1": ["<first-domain-needing-certificate>", "<second-domain-needing-certificate>", {"name": "<route-with.three.levels.com>", "zoneLevels": 3}],
     "cert-name2": ["<third-domain-needing-certificate>", "<fourth-domain-needing-certificate>"]
   },
   "acme-dns-retry": 30,

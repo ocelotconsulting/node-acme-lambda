@@ -20,8 +20,9 @@ const toStandardB64 = (str) => {
   return b64
 }
 
-const newCertificate = (keypair, authorizations, certUrl) => (csr) =>
-  sendSignedRequest({
+const newCertificate = (keypair, authorizations, certUrl) => (csr) => {
+  console.log('Requesting certificate from lets-encrypt')
+  return sendSignedRequest({
     resource: 'new-cert',
     csr,
     authorizations
@@ -30,13 +31,15 @@ const newCertificate = (keypair, authorizations, certUrl) => (csr) =>
     downloadBinary(data.header['location'])
     .then((certificate) =>
       downloadBinary(toIssuerCert(data.header['link']))
-      .then((issuerCert) =>
-        ({
+      .then((issuerCert) => {
+        console.log('Downloaded certificate.')
+        return ({
           cert: toPEM(certificate),
           issuerCert: toPEM(issuerCert)
         })
-      )
+      })
     )
   )
+}
 
 module.exports = newCertificate
