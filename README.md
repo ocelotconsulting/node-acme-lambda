@@ -29,7 +29,7 @@ your environment:
 | `s3-account-bucket`            | An S3 bucket to place account keys/config data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-cert-bucket`            | An S3 bucket to place domain certificate data into. You will need to create this bucket and assign the [IAM role](AWS.md) to read/write.  |
 | `s3-folder`            | A folder within the above buckets to place the files under, in case there are other contents of these buckets.  |
-| `certificate-info`            | Object containing certificate information mapping certificate names to domains.  |
+| `certificate-info`            | Object containing [certificate information mapping](https://github.com/ocelotconsulting/node-letsencrypt-lambda#certificate-info-field-of-configuration-file) certificate names to domains.  |
 
 ## Execution
 Follow these steps to get started:
