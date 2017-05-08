@@ -5,7 +5,7 @@ const config = {
   "certificate-info": JSON.parse(process.env.S3_CERT_INFO),
   "acme-dns-retry": 30,
   "acme-dns-retry-delay-ms": 2000,
-  "acme-account-file": "account",
+  "acme-account-file": process.env.ACCOUNT_PATH,
   "acme-account-email": process.env.REGISTRATION_EMAIL,
   "acme-account-key-bits": 2048,
   "acme-directory-url": "https://acme-staging.api.letsencrypt.org"
