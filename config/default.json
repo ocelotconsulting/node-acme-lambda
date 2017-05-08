@@ -1,4 +1,5 @@
 {
+  "kms-key": "<your-aws-kms-key>",
   "s3-account-bucket": "<your-s3-account-config-bucket>",
   "s3-cert-bucket": "<your-s3-ssl-cert-bucket>",
   "s3-folder": "<folder-under-bucket>",

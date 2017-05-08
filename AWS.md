@@ -15,6 +15,11 @@ and "letsencrypt-certs.MYWEBSITE.com" to store files, and gives access to two ho
     "Version": "2012-10-17",
     "Statement": [
         {
+		"Effect": "Allow",
+		"Action": [ "kms:Decrypt", "kms:Encrypt" ],
+		"Resource": "arn:aws:kms:REGION:999999999999:key/01234567-890a-bcde-f012-3456789abcde"
+        },
+        {
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
@@ -58,6 +63,9 @@ and "letsencrypt-certs.MYWEBSITE.com" to store files, and gives access to two ho
     ]
 }
 ```
+
+## AWS KMS
+The role used by Lambda will also need to be added to Key Users on the KMS key referenced in its IAM Policy.
 
 ## Lambda Execution
 The Lambda function needs to run periodically as a scheduled function, preferably
