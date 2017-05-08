@@ -1,7 +1,7 @@
 const generateRSAKeyPair = require('../../util/generateRSAKeyPair')
 const newCertificate = require('./newCertificate')
 const generateCSR = require('../../util/generateCSR')
-const config = require('../../../config/default.json')
+const config = require('../../../config/default.js')
 const saveFile = require('../../aws/s3/saveFile')
 
 const saveCertificate = (data) =>

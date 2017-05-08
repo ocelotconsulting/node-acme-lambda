@@ -1,4 +1,4 @@
-const config = require('../../config/default.json')
+const config = require('../../config/default.js')
 const agent = require('superagent')
 
 const getDiscoveryUrls = (discoveryUrl) =>
