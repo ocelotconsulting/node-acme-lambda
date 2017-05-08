@@ -6,6 +6,7 @@ const saveFile = require('../../aws/s3/saveFile')
 
 const saveCertificate = (data) =>
   saveFile(
+    config['kms-key'],
     config['s3-cert-bucket'],
     config['s3-folder'],
     `${data.key}.json`,

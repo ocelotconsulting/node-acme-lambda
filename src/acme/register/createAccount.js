@@ -10,6 +10,7 @@ const saveAccount = (data) => {
     'agreement': data.agreement
   }
   return saveFile(
+    config['kms-key'],
     config['s3-account-bucket'],
     config['s3-folder'],
     config['acme-account-file'],
