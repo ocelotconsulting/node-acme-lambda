@@ -1,6 +1,6 @@
 const RSA = require('rsa-compat').RSA
 const promisify = require('es6-promisify')
-const config = require('../../config/default.json')
+const config = require('../../config/default.js')
 
 const bitlen = config['acme-account-key-bits']
 const exp = 65537

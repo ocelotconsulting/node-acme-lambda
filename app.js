@@ -1,6 +1,6 @@
 const generateCertificate = require('./src/acme/generateCertificate')
 const isExpired = require('./src/util/isExpired')
-const config = require('./config/default.json')
+const config = require('./config/default.js')
 
 const single = (key, domains) =>
   isExpired(key)

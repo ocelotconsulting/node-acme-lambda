@@ -1,4 +1,4 @@
-const config = require('../../config/default.json')
+const config = require('../../config/default.js')
 const readFile = require('../aws/s3/readFile')
 const forge = require('node-forge')
 

@@ -3,7 +3,7 @@ const getHostedZoneId = require('../../aws/route53/getHostedZoneId')
 const RSA = require('rsa-compat').RSA
 const crypto = require('crypto')
 const dns = require('dns')
-const config = require('../../../config/default.json')
+const config = require('../../../config/default.js')
 const promisify = require('es6-promisify')
 const resolveTxt = promisify(dns.resolveTxt)
 

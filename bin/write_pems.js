@@ -1,5 +1,5 @@
 const readFile = require('../src/aws/s3/readFile')
-const config = require('../config/default.json')
+const config = require('../config/default.js')
 const fs = require('fs')
 
 const testContext = {
