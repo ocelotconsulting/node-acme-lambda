@@ -5,7 +5,7 @@ const getDomainZone = (domain, zones) =>
 
 const getHostedZoneId = (domain) => {
   if (typeof domain == 'object' && domain.zoneId) {
-    return domain.zoneId
+    return Promise.resolve(domain.zoneId)
   }
 
   const domainName = (typeof domain === 'string') ? domain : domain.name
