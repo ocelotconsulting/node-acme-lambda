@@ -19,7 +19,7 @@ Please see the [roadmap](ROADMAP.md) for a sorted list of upcoming features by p
 This project requires a little [configuration](AWS.md) to be used in AWS.
 
 ## General configuration
-Modify the [configuration file](./config/default.json) with the values needed for
+Modify the [configuration file](./config.js) with the values needed for
 your environment:
 
 | *Variable*                 | *Description*         |

@@ -6,7 +6,6 @@ timestamp() {
 
 dist_file=dist-`timestamp`.zip
 npm run clean
-echo $letsencrypt_config > ./config/default.json
 npm run dist
 echo $cf_template > cf_template.json
 echo $cf_parameters | sed "s|dist.zip|${LAMBCI_REPO}/${dist_file}|g" > cf_parameters.json

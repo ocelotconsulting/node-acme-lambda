@@ -11,8 +11,7 @@ zipfile.on('error', (err) => {
 })
 zipfile.pipe(output)
 zipfile.bulk([
-  { expand: true, cwd: './/', src: ['app.js'] },
-  { expand: true, cwd: './', src: ['config/**'] },
+  { expand: true, cwd: './/', src: ['app.js', 'config.js'] },
   { expand: true, cwd: './', src: ['src/**'] },
   { expand: true, cwd: './build', src: ['**'] }
 ])

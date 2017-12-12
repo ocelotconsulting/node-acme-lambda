@@ -11,6 +11,7 @@
     "clean": "rm dist*.zip || true && rm -rf build",
     "dist": "mkdir build && npm install && npm prune --production && mv node_modules ./build && npm install && node zip.js",
     "pems": "node bin/write_pems.js",
+    "import": "node bin/importToACM.js",
     "local-cert": "node bin/local.js",
     "test": "node -e \"function noop(){}\"",
     "deploy": ". ./deploy.sh"
@@ -23,7 +24,7 @@
   "author": "Larry Anderson",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.20.0",
+    "aws-sdk": "^2.168.0",
     "es6-promisify": "^4.1.0",
     "node-forge": "^0.6.45",
     "rsa-compat": "^1.2.7",

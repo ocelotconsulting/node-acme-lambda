@@ -1,4 +1,4 @@
-const config = require('../../config/default.json')
+const config = require('../../config')
 const agent = require('superagent')
 
 const getNonce = () =>

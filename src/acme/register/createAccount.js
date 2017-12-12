@@ -1,7 +1,7 @@
 const generateRSAKeyPair = require('../../util/generateRSAKeyPair')
 const register = require('./register')
 const saveFile = require('../../aws/s3/saveFile')
-const config = require('../../../config/default.json')
+const config = require('../../../config')
 
 const saveAccount = (data) => {
   const account = {
