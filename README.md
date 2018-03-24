@@ -32,7 +32,12 @@ your environment:
 | `certificate-info`            | Object containing [certificate information mapping](https://github.com/ocelotconsulting/node-letsencrypt-lambda#certificate-info-field-of-configuration-file) certificate names to domains.  |
 
 ## ACME v2 Support
-Change the `acme-directory-url` to one of the v2 urls (stage: 'https://acme-staging-v02.api.letsencrypt.org', prod: 'https://acme-v02.api.letsencrypt.org') and you will be able to request wildcarded certificates.
+Change the `acme-directory-url` to one of the v2 urls:
+
+* stage: 'https://acme-staging-v02.api.letsencrypt.org'
+* prod: 'https://acme-v02.api.letsencrypt.org')
+
+and you will be able to request wildcarded certificates.
 
 ## Execution
 Follow these steps to get started:
