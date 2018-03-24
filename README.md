@@ -34,8 +34,8 @@ your environment:
 ## ACME v2 Support
 Change the `acme-directory-url` to one of the v2 urls:
 
-* stage: 'https://acme-staging-v02.api.letsencrypt.org'
-* prod: 'https://acme-v02.api.letsencrypt.org')
+* stage: https://acme-staging-v02.api.letsencrypt.org
+* prod: https://acme-v02.api.letsencrypt.org
 
 and you will be able to request wildcarded certificates.
 
