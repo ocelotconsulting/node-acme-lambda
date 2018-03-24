@@ -31,6 +31,9 @@ your environment:
 | `s3-folder`            | A folder within the above buckets to place the files under, in case there are other contents of these buckets.  |
 | `certificate-info`            | Object containing [certificate information mapping](https://github.com/ocelotconsulting/node-letsencrypt-lambda#certificate-info-field-of-configuration-file) certificate names to domains.  |
 
+## ACME v2 Support
+Change the `acme-directory-url` to one of the v2 urls (stage: 'https://acme-staging-v02.api.letsencrypt.org', prod: 'https://acme-v02.api.letsencrypt.org') and you will be able to request wildcarded certificates.
+
 ## Execution
 Follow these steps to get started:
 
@@ -54,9 +57,9 @@ Follow these steps to get started:
 
         $ npm run pems
 
-### `certificate-info` field of [configuration file](./config/default.json)
+### `certificate-info` field of [configuration file](./config.js)
 
 - Certificate names are keys of JSON object, denoting sets of sub/domains to use as SAN names in certificate.
 - Value of certificate name keys is array of sub/domains, which can contain either:
-  - a string (default, looks for route53 hosted zone with 2 levels)
+  - a string (default, looks for route53 hosted zone with 2 levels **this is all that is currently supported for v2/wildcard certificates currently**)
   - or an object, with both `name` and `zoneLevels` defined, allowing hosted zones at levels greater than 2 (i.e. `host.at.longer.domain.com` could specify 4 zone levels, which would require proper NS records in parent Route53 hosted zone or other DNS).

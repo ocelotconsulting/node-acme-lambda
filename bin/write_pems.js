@@ -20,7 +20,9 @@ const getPEMsForCertInfo = (key) =>
     console.log(`About to write PEM files for ${key}..`)
     try {
       fs.writeFileSync(`./${key}.pem`, certJSON.cert.toString())
-      fs.writeFileSync(`./${key}-chain.pem`, certJSON.issuerCert.toString())
+      if (certJSON.issuerCert) {
+        fs.writeFileSync(`./${key}-chain.pem`, certJSON.issuerCert.toString())
+      }
       fs.writeFileSync(`./${key}-key.pem`, certJSON.key.privateKeyPem.toString())
     } catch (e) {
       console.error('Error writing pem files', e)

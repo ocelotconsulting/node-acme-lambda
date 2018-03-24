@@ -24,7 +24,7 @@ const getChallenges = (domains, keypair, authzUrl) =>
           value: domainName
         }
       }, keypair, authzUrl)
-      .then((data) => validateChallenges(domain, keypair, data.body))
+      .then(data => validateChallenges(domain, keypair, data.body))
     })
   )
   .catch((err) => {

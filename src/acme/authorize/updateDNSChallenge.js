@@ -6,11 +6,10 @@ const dns = require('dns')
 const config = require('../../../config')
 const promisify = require('es6-promisify')
 const resolveTxt = promisify(dns.resolveTxt)
+const urlB64 = require('../urlB64')
 
 const getTokenDigest = (dnsChallenge, acctKeyPair) =>
   crypto.createHash('sha256').update(`${dnsChallenge.token}.${RSA.thumbprint(acctKeyPair)}`).digest()
-
-const urlB64 = (buffer) => buffer.toString('base64').replace(/[+]/g, '-').replace(/\//g, '_').replace(/=/g, '')
 
 const updateDNSChallenge = (domain, dnsChallenge, acctKeyPair) => {
   const domainName = (typeof domain === 'string') ? domain : domain.name

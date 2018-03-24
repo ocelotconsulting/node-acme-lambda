@@ -3,7 +3,7 @@ const register = require('./register')
 const saveFile = require('../../aws/s3/saveFile')
 const config = require('../../../config')
 
-const saveAccount = (data) => {
+const saveAccount = data => {
   const account = {
     key: data.keypair,
     'url': data.location,
@@ -18,9 +18,9 @@ const saveAccount = (data) => {
   .then(() => account)
 }
 
-const createAccount = (regUrl) =>
+const createAccount = acctPromise =>
   generateRSAKeyPair()
-  .then(register(regUrl, config['acme-account-email']))
+  .then(acctPromise)
   .then(saveAccount)
 
 module.exports = createAccount
