@@ -7,6 +7,7 @@ const config = require('../../../config')
 const promisify = require('es6-promisify')
 const resolveTxt = promisify(dns.resolveTxt)
 const urlB64 = require('../urlB64')
+const retry = require('../../retry')(config['acme-dns-retry-delay-ms'], config['acme-dns-retry'])
 
 const getTokenDigest = (dnsChallenge, acctKeyPair) =>
   crypto.createHash('sha256').update(`${dnsChallenge.token}.${RSA.thumbprint(acctKeyPair)}`).digest()
@@ -25,11 +26,6 @@ const updateDNSChallenge = (domain, dnsChallenge, acctKeyPair) => {
     throw e
   })
 }
-
-const delayPromise = (delay) => (data) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => { resolve(data) }, delay)
-  })
 
 const dnsPreCheck = (domain, expect) => (tryCount) => {
   console.log(`Attempt ${tryCount + 1} to resolve TXT record for ${domain}`)
@@ -55,13 +51,5 @@ const validateDNSChallenge = (domain, dnsChallengeText) => {
     }
   })
 }
-
-const retry = (tryCount, promise) =>
-  promise(tryCount).then(delayPromise(config['acme-dns-retry-delay-ms']))
-  .then((data) =>
-    (tryCount < config['acme-dns-retry'] && !data.result)
-      ? retry(data.tryCount, promise)
-      : data
-  )
 
 module.exports = updateDNSChallenge

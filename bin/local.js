@@ -2,7 +2,7 @@ const cert = require('../app.js')
 
 const testContext = {
   succeed: (data) => {
-    console.log(data)
+    console.log(`Results are ${JSON.stringify(data)}`)
     process.exit(0)
   }
 }

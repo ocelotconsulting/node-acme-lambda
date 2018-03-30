@@ -5,8 +5,12 @@ const readFile = (bucket, siteId, fileName) =>
     Bucket: bucket,
     Key: `${siteId}/${fileName}`
   }).promise()
-  .catch((e) => {
-    console.error(`Couldn't read s3://${bucket}/${siteId}/${fileName}`, e)
+  .catch(e => {
+    if (e.message.indexOf('does not exist')) {
+      console.log(`s3://${bucket}/${siteId}/${fileName} does not exist.`)
+    } else {
+      console.error(`Couldn't read s3://${bucket}/${siteId}/${fileName}`, e)
+    }
     throw e
   })
 
