@@ -23,7 +23,7 @@ const checkRefresh = (registration) => (data) => {
     }))
 }
 
-const refreshRegistration = (registration) =>
+const refreshRegistration = (registration) => //NOSONAR
   sendRefresh(registration)
   .then(checkRefresh(registration))
 

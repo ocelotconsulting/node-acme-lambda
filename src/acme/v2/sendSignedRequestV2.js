@@ -2,7 +2,7 @@ const getV2AntiReplayNonce = require('./getV2AntiReplayNonce')
 const RSA = require('rsa-compat').RSA
 const agent = require('superagent')
 
-const sendSignedRequest = (payload, keypair, url, nonceUrl, kid = undefined) =>
+const sendSignedRequest = (payload, keypair, url, nonceUrl, kid = null) =>
   getV2AntiReplayNonce(nonceUrl)
   .then(nonce => {
     const {header} = RSA.signJws(keypair, new Buffer(JSON.stringify(payload)), nonce)
