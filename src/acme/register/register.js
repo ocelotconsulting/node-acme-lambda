@@ -11,7 +11,7 @@ const sendRefresh = (registration) =>
 const checkRefresh = (registration) => (data) => {
   const refreshedAgreement = toAgreement(data.header['link'])
   return ((registration.agreement !== refreshedAgreement.agreement)
-    ? refreshRegistration({
+    ? refreshRegistration({ //NOSONAR
       keypair: registration.keypair,
       location: registration.location,
       agreement: refreshedAgreement.agreement
@@ -23,9 +23,9 @@ const checkRefresh = (registration) => (data) => {
     }))
 }
 
-const refreshRegistration = (registration) => //NOSONAR
+const refreshRegistration = (registration) =>
   sendRefresh(registration)
-  .then(checkRefresh(registration))
+  .then(checkRefresh(registration)) //NOSONAR
 
 const register = regUrl => keypair =>
   sendSignedRequest({
