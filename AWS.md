@@ -3,12 +3,12 @@
 ## IAM
 In addition to the AWSLambdaBasicExecutionRole (for CloudWatch logging), the
 lambda function also needs to be assigned a role which
-has permissions to write to Route53 (to satisfy Lets-Encrypt DNS challenge) and
+has permissions to write to Route53 (to satisfy ACME DNS challenge) and
 to read/write to the S3 buckets it is configured for for user registration and
 domain certificate files.
 
-Here's an example policy which uses buckets called "letsencrypt-account.MYWEBSITE.com" 
-and "letsencrypt-certs.MYWEBSITE.com" to store files, and gives access to two hosted zones:
+Here's an example policy which uses buckets called "acme-account.MYWEBSITE.com"
+and "acme-certs.MYWEBSITE.com" to store files, and gives access to two hosted zones:
 
 ```json
 {
@@ -20,8 +20,8 @@ and "letsencrypt-certs.MYWEBSITE.com" to store files, and gives access to two ho
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::letsencrypt-account.MYWEBSITE.com",
-                "arn:aws:s3:::letsencrypt-certs.MYWEBSITE.com"
+                "arn:aws:s3:::acme-account.MYWEBSITE.com",
+                "arn:aws:s3:::acme-certs.MYWEBSITE.com"
             ]
         },
         {
@@ -31,8 +31,8 @@ and "letsencrypt-certs.MYWEBSITE.com" to store files, and gives access to two ho
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::letsencrypt-account.MYWEBSITE.com/*",
-                "arn:aws:s3:::letsencrypt-certs.MYWEBSITE.com/*"
+                "arn:aws:s3:::acme-account.MYWEBSITE.com/*",
+                "arn:aws:s3:::acme-certs.MYWEBSITE.com/*"
             ]
         },
         {

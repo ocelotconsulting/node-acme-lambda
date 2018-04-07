@@ -3,7 +3,7 @@ const downloadBinary = require('../../util/downloadBinary')
 const {toIssuerCert, toPEM, toStandardB64} = require('../certUtils')
 
 const newCertificate = (keypair, authorizations, certUrl) => (csr) => {
-  console.log('Requesting certificate from lets-encrypt')
+  console.log('Requesting certificate from ACME provider')
   return sendSignedRequest({
     resource: 'new-cert',
     csr,

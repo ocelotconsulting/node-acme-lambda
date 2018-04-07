@@ -1,11 +1,11 @@
 {
-  "name": "node-letsencrypt-lambda",
+  "name": "node-acme-lambda",
   "version": "1.0.0",
-  "description": "Free Lets-Encrypt certificate management for CloudFront/AWS written in nodejs",
+  "description": "Free ACME certificate management for CloudFront/AWS written in nodejs",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ocelotconsulting/node-letsencrypt-lambda.git"
+    "url": "https://github.com/ocelotconsulting/node-acme-lambda.git"
   },
   "scripts": {
     "clean": "rm dist*.zip || true && rm -rf build",
@@ -19,6 +19,7 @@
   },
   "keywords": [
     "letsencrypt",
+    "acme",
     "nodejs",
     "aws"
   ],

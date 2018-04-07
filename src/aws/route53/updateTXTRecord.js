@@ -14,7 +14,7 @@ const updateTXTRecord = (hostedZoneId, domain, digest) => {
           }
         }
       ],
-      Comment: 'This value is a computed digest of the token received from the LetsEncrypt challenge.'
+      Comment: 'This value is a computed digest of the token received from the ACME challenge.'
     },
     HostedZoneId: hostedZoneId
   }
