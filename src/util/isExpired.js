@@ -8,7 +8,7 @@ const diffDays = (certExpiration, now) =>
 const certInValid = (cert, date) =>
   (cert.notBefore > date > cert.notAfter || diffDays(new Date(cert.validity.notAfter), date) < 30)
 
-module.exports = (certKey) =>
+module.exports = certKey =>
   readFile(
     config['s3-cert-bucket'],
     config['s3-folder'],

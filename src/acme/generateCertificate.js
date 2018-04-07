@@ -8,7 +8,7 @@ const register = require('./register/register')
 const performAuthorizations = require('./v2/performAuthorizations')
 const createV2Certificate = require('./v2/createV2Certificate')
 
-module.exports = (certInfo) =>
+module.exports = certInfo =>
   getDiscoveryUrls()
   .then((urls) =>
     Object.keys(urls).includes('new-authz')
