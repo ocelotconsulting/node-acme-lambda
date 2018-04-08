@@ -1,9 +1,7 @@
-const toIssuerCert = (links) => {
-  const match = /.*<(.*)>;rel="up".*/.exec(links)
-  return match[1]
-}
+const toIssuerCert = links =>
+  /.*<(.*)>;rel="up".*/.exec(links)[1]
 
-const toStandardB64 = (str) => {
+const toStandardB64 = str => {
   var b64 = str.replace(/-/g, '+').replace(/_/g, '/').replace(/=/g, '')
   switch (b64.length % 4) {
     case 2:
@@ -16,10 +14,7 @@ const toStandardB64 = (str) => {
   return b64
 }
 
-const toPEM = (cert) => {
-  cert = toStandardB64(cert.toString('base64'))
-  cert = cert.match(/.{1,64}/g).join('\n')
-  return `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----\n`
-}
+const toPEM = cert =>
+  `-----BEGIN CERTIFICATE-----\n${toStandardB64(cert.toString('base64')).match(/.{1,64}/g).join('\n')}\n-----END CERTIFICATE-----\n`
 
 module.exports = {toIssuerCert, toPEM, toStandardB64}
