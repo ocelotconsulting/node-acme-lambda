@@ -19,7 +19,7 @@ const v2ACME = (urls, certInfo) =>
   getAccount(newAccount(urls['newAccount'], urls['newNonce']))
   .then(account =>
     getV2Order(certInfo.domains, account.key, urls['newOrder'], urls['newNonce'], account.url)
-    .then(performAuthorizations(certInfo.domains, account.key, urls['newNonce'], account.url))
+    .then(performAuthorizations(account.key, urls['newNonce'], account.url))
     .then(createV2Certificate(certInfo, account.key, urls['newNonce'], account.url))
   )
 

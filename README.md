@@ -1,4 +1,4 @@
-# Node Lambda ACME (Lets Encrypt-compatible)
+# Node Lambda ACME (Let's Encrypt-compatible)
 
 ![](https://sonarcloud.io/api/project_badges/measure?project=node-acme-lambda&metric=alert_status)
 

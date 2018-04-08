@@ -7,7 +7,7 @@ const getDNSChallenge = (challenges) => challenges.find((challenge) => challenge
 const validateChallenges = (domain, accountKeyPair, challengeResponse) => {
   const dnsChallenge = getDNSChallenge(challengeResponse.challenges)
   return Promise.all([
-    updateDNSChallenge(domain, dnsChallenge, accountKeyPair)
+    updateDNSChallenge(domain, [dnsChallenge], accountKeyPair)
     .then(() => sendDNSChallengeValidation(dnsChallenge, accountKeyPair))
   ])
 }

@@ -5,21 +5,32 @@ const sendV2DNSChallengeValidation = require('./sendV2DNSChallengeValidation')
 
 const getDNSChallenge = (challenges) => challenges.find((challenge) => challenge.type === 'dns-01')
 
-const validateChallenges = (domain, accountKeyPair, challengeResponse, nonceUrl, url) => {
-  const dnsChallenge = getDNSChallenge(challengeResponse.challenges)
-  return Promise.all([
-    updateDNSChallenge(challengeResponse.identifier.value, dnsChallenge, accountKeyPair)
-    .then(() => sendV2DNSChallengeValidation(dnsChallenge, accountKeyPair, nonceUrl, url))
-  ])
-}
+const consolidateChallenges = authBodies =>
+  authBodies.reduce((acc, curr) => {
+    const dnsChallenge = getDNSChallenge(curr.challenges)
+    if (acc[curr.identifier.value]) {
+      acc[curr.identifier.value].push(dnsChallenge)
+    } else {
+      acc[curr.identifier.value] = [dnsChallenge]
+    }
+    return acc
+  }, {})
 
-module.exports = (domains, keypair, nonceUrl, url) => orderInfoUrl =>
+const validateChallenges = (accountKeyPair, nonceUrl, url) => challenges =>
+  Promise.all(Object.keys(challenges).map(txtName =>
+    updateDNSChallenge(txtName, challenges[txtName], accountKeyPair)
+    .then(() => sendV2DNSChallengeValidation(challenges[txtName], accountKeyPair, nonceUrl, url))
+  ))
+
+module.exports = (keypair, nonceUrl, url) => orderInfoUrl =>
   agent.get(orderInfoUrl)
   .then(({body}) =>
-    Promise.all(domains.map((domain, idx) =>
-      agent.get(body.authorizations[idx])
-      .then(({body: authBody}) => validateChallenges(domain, keypair, authBody, nonceUrl, url))
+    Promise.all(body.authorizations.map(authUrl =>
+      agent.get(authUrl)
+      .then(({body: authBody}) => authBody)
     ))
+    .then(consolidateChallenges)
+    .then(validateChallenges(keypair, nonceUrl, url))
     .then(() => body.finalize)
   )
   .catch((err) => {
