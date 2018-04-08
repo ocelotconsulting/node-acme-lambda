@@ -22,4 +22,14 @@ describe('certUtils', () => {
     result.should.eql('somewordsplus/equals+this')
   })
 
+  it('toStandardB64 functions as expected mod 2', () => {
+    const result = toStandardB64('somewords=plus_equals-thiss')
+    result.should.eql('somewordsplus/equals+thiss==')
+  })
+
+  it('toStandardB64 functions as expected mod 3', () => {
+    const result = toStandardB64('somewords=plus_equals-th')
+    result.should.eql('somewordsplus/equals+th=')
+  })
+
 })
