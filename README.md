@@ -1,6 +1,6 @@
 # Node Lambda ACME (Let's Encrypt-compatible)
 
-![](https://sonarcloud.io/api/project_badges/measure?project=node-acme-lambda&metric=alert_status)
+[![](https://sonarcloud.io/api/project_badges/measure?project=node-acme-lambda&metric=alert_status)](https://sonarcloud.io/dashboard?id=node-acme-lambda)
 
 Use [AWS Lambda](https://aws.amazon.com/lambda/) to manage SSL certificates for
 ACME providers.
