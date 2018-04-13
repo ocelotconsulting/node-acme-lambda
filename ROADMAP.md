@@ -10,6 +10,7 @@ Please feel free to file issues on this repository if you have questions, concer
 * Refactoring to reduce code duplication between acme v1/v2
 * Webpack/babel to add ES6 support and allow newer language functionality
 * Enable other DNS providers (or other challenges) besides Route53
+* Possibly separate to lib/cli repo + lambda repo
 * ~~Multiple domain support~~
 * ~~Actually convert to lambda (express/handler)~~
 * ~~Sister project for responding to SNS notification and configuring IAM.~~
