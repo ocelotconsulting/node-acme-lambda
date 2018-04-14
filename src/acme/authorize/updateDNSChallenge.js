@@ -4,7 +4,7 @@ const RSA = require('rsa-compat').RSA
 const crypto = require('crypto')
 const dns = require('dns')
 const config = require('../../../config')
-const promisify = require('es6-promisify')
+const {promisify} = require('util')
 const resolveTxt = promisify(dns.resolveTxt)
 const urlB64 = require('../urlB64')
 const retry = require('../../retry')(config['acme-dns-retry-delay-ms'], config['acme-dns-retry'])
@@ -16,7 +16,6 @@ const arrayContainsArray = (superset, subset) =>
     subset.every(value => superset.indexOf(value) >= 0)
 
 const flatten = input => Array.prototype.concat.apply([], input)
-
 
 const dnsPreCheck = (domain, expect) => (tryCount) => {
   console.log(`Attempt ${tryCount + 1} to resolve TXT record for ${domain}`)
@@ -36,16 +35,15 @@ const dnsPreCheck = (domain, expect) => (tryCount) => {
   })
 }
 
-const validateDNSChallenge = (domain, dnsChallengeTexts) => {
-  return retry(0, dnsPreCheck(domain, dnsChallengeTexts))
-  .then((data) => {
+const validateDNSChallenge = (domain, dnsChallengeTexts) =>
+  retry(0, dnsPreCheck(domain, dnsChallengeTexts))
+  .then(data => {
     if (data.result) {
       return data.result
     } else {
       throw new Error(`Could not pre-validate DNS TXT record. Didn't find ${dnsChallengeTexts} in _acme-challenge.${domain}`)
     }
   })
-}
 
 const updateDNSChallenge = (domain, dnsChallenges, acctKeyPair) => {
   const domainName = (typeof domain === 'string') ? domain : domain.name
