@@ -5,8 +5,8 @@ node_js:
   - "8"
 
 script:
-# todo: remove '| true' and enforce linter
-- npm run lint | true
+# todo: remove '|| true' and enforce linter
+- npm run lint || true
 - npm run test
 - npm run test:coverage
 - npm run dist
