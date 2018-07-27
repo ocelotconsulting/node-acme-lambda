@@ -15,7 +15,9 @@
     "local-cert": "node bin/local.js",
     "test": "mocha test/unit --recursive --require test/setup --colors --timeout 15000",
     "test:coverage": "nyc --reporter=html --reporter=lcov --reporter=text mocha test/unit --recursive --require test/setup",
-    "deploy": ". ./deploy.sh"
+    "deploy": ". ./deploy.sh",
+    "lint": "eslint .",
+    "eslint": "eslint"
   },
   "keywords": [
     "letsencrypt",
