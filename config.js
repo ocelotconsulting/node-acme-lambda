@@ -3,8 +3,8 @@ const defaultCertInfo = {
   'cert-name2': ['<third-domain-needing-certificate>', '<fourth-domain-needing-certificate>']
 }
 
-let productionDirectoryUrl = process.env.ACME_DIRECTORY_URL || 'https://acme-v01.api.letsencrypt.org'
-let stagingDirectoryUrl = process.env.ACME_DIRECTORY_URL || 'https://acme-staging.api.letsencrypt.org'
+const productionDirectoryUrl = process.env.ACME_DIRECTORY_URL || 'https://acme-v01.api.letsencrypt.org'
+const stagingDirectoryUrl = process.env.ACME_DIRECTORY_URL || 'https://acme-staging.api.letsencrypt.org'
 
 module.exports = {
   's3-account-bucket': process.env.S3_ACCOUNT_BUCKET || '<your-s3-account-config-bucket>',
