@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+  - "8"
+
+script:
+# todo: remove '|| true' and enforce linter
+- npm run lint || true
+- npm run test
+- npm run test:coverage
+- npm run dist
+#- npm run clean
+#- npm run pems
+#- npm run import
+#- npm run local-cert
+# todo: only on tag
+#- npm run deploy
