@@ -5,8 +5,11 @@ const forge = require('node-forge')
 const diffDays = (certExpiration, now) =>
   Math.round(Math.abs((certExpiration.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)))
 
-const certInValid = (cert, date) =>
-  (cert.notBefore > date > cert.notAfter || diffDays(new Date(cert.validity.notAfter), date) < 30)
+const certInValid = (cert, date) => {
+  const notBefore = cert.notBefore || new Date(cert.validity.notBefore)
+  const notAfter = cert.notAfter || new Date(cert.validity.notAfter)
+  return (notBefore > date > notAfter || diffDays(notAfter, date) < 30)
+}
 
 module.exports = certKey =>
   readFile(
