@@ -1,5 +1,6 @@
 const updateTXTRecord = require('../../aws/route53/updateTXTRecord')
 const getHostedZoneId = require('../../aws/route53/getHostedZoneId')
+const getChangeStatus = require('../../aws/route53/getChangeStatus')
 const RSA = require('rsa-compat').RSA
 const crypto = require('crypto')
 const dns = require('dns')
@@ -16,6 +17,18 @@ const arrayContainsArray = (superset, subset) =>
     subset.every(value => superset.indexOf(value) >= 0)
 
 const flatten = input => Array.prototype.concat.apply([], input)
+
+const changePropCheck = (domain, id) => (tryCount) => {
+  console.log(`Attempt ${tryCount + 1} for DNS record to propagate for ${domain}`)
+  return getChangeStatus(id)
+      .then(status => {
+        ++tryCount
+        return {
+          tryCount,
+          result: status === 'INSYNC'
+        }
+      })
+}
 
 const dnsPreCheck = (domain, expect) => (tryCount) => {
   console.log(`Attempt ${tryCount + 1} to resolve TXT record for ${domain}`)
@@ -53,7 +66,8 @@ const updateDNSChallenge = (domain, dnsChallenges, acctKeyPair) => {
     console.log(`Updating DNS TXT Record for ${domainName} to contain ${dnsChallengeTexts} in Route53 hosted zone ${id}`)
     return updateTXTRecord(id, domainName, dnsChallengeTexts)
   })
-  .then(updated => validateDNSChallenge(domainName, dnsChallengeTexts))
+  .then(updated => retry(0, changePropCheck(domainName, updated.ChangeInfo.Id)))
+  .then(() => validateDNSChallenge(domainName, dnsChallengeTexts))
   .catch(e => {
     console.error(`Couldn't write token digest to DNS record.`, e)
     throw e
